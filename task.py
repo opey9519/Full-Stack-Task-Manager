@@ -36,9 +36,9 @@ def modify_task(id):
     for task in tasks:
         if task["id"] == id:
             task["name"] = data.get("name", task["name"])
-            task["complete"] + data.get("complete", task["complete"])
+            task["complete"] = data.get("complete", task["complete"])
             return jsonify(task), 200
-    return jsonify(print("Error: Task not found")), 404
+    return jsonify("Error: Task not found"), 404
 
 # Delete task in task manager given task id and verification with modify_task function
 @app.route("/tasks/<int:id>", methods=["DELETE"])
@@ -47,5 +47,5 @@ def delete_task(id):
     for task in tasks:
         if task["id"] == id:
             tasks.remove(task)
-            return jsonify(print("Task deleted")), 200
-    return jsonify(print("Error: Task not found")), tasks, 404
+            return jsonify("Task deleted"), 200
+    return jsonify("Error: Task not found"), tasks, 404
